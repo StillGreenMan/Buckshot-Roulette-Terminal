@@ -9,9 +9,11 @@ Controls are stupid simple. Type "yes"/"y" to shoot yourself, and "no"/"n" to sh
 Once the round is over, the game will exit.
 
 # System Requirements
--A keyboard
--Boredom
--An operating system. TBH if you're compiling it yourself it'll probably run on whatever you run it on.
+- A keyboard
+- Boredom
+- An operating system.
+
+TBH if you're compiling it yourself it'll probably run on whatever you compile it for.
 
 # Why?
 Short answer: Because I can.
