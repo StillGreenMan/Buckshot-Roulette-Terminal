@@ -91,7 +91,7 @@ int main(){
 			}
 			std::cout<<"The dealer points the gun at "<<(target ? "himself.":"you.")<<std::endl;
 			myTurn=!shoot(target,shots,count);
-			myTurn = target?false:myTurn;
+			myTurn = target?myTurn:false;
 		}else{
 			std::cout<<"Dealer: YOUR TURN!"<<std::endl;
 			bool action=false;
