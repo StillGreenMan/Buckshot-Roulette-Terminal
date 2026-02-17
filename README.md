@@ -18,6 +18,6 @@ TBH if you're compiling it yourself it'll probably run on whatever you compile i
 # Why?
 Short answer: Because I can.
 
-Long answer: I was listening to Delightful KissBoy's technical videos on Buckshot Roulette at work last night (2/16/2026), and I wanted to see if I could replicate the Dealer's AI without looking at the decompiled source code. This was an bold feat to attempt, considering I myself have never played Buckshot Roulette and only recently learned about it.
+Long answer: I was listening to Delightful KissBoy's technical videos on Buckshot Roulette at work last night (2/16/2026), and I wanted to see if I could replicate the Dealer's AI without looking at the decompiled source code. This was an bold feat to attempt, considering I myself have never played Buckshot Roulette and only recently learned about the game.
 
 At the moment this terminal "port" is obviously insanely bareboned, since there's no items and the terminal just closes once the round is over. I may go back and improve it to make it more feature-complete, but this was literally just a personal test.
