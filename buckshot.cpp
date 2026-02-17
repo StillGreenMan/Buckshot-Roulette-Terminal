@@ -96,7 +96,7 @@ int main(){
 			std::cout<<"Dealer: YOUR TURN!"<<std::endl;
 			bool action=false;
 			while(!action){
-				std::cout<<"\n\nShoot yourself? (Y/N)"<<std::endl;
+				std::cout<<"\n\nShoot yourself? (y/n)"<<std::endl;
 				std::string answer;
 				std::cin>>answer;
 				if(answer=="yes"||answer=="y"){
