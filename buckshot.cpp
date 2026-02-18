@@ -1,6 +1,6 @@
-#include <iostream>
-#include <random>
-#include <chrono>
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
 int myLife=6;
 int playerLife=6;
@@ -9,15 +9,7 @@ int live=0;
 int blank=0;
 
 int seconds(){
-	auto now = std::time(nullptr);
-	std::tm local{};
-	#if defined(_WIN32)
-		localtime_s(&local,&now);
-	#else
-		local = *std::localtime(&now);
-	#endif
-	int time = local.tm_sec;
-	return time;
+	return time(NULL)%60;
 }
 
 bool shoot(bool target, bool shots[], int count){
@@ -27,16 +19,16 @@ bool shoot(bool target, bool shots[], int count){
 		int sec = seconds();
 		if(lastSec!=sec){
 			if(test){
-				std::cout<<".";
+				putchar('.');
 			}else{
-				std::cout<<"\n";
+				putchar('\n');
 			}
 			lastSec=sec;
 			test--;
 		}
 	}
 	if(shots[count-1]){
-		std::cout<<"*BANG*"<<std::endl;
+		printf("*BANG*\n");
 		if(target){
 			playerLife--;
 		}else{
@@ -44,20 +36,20 @@ bool shoot(bool target, bool shots[], int count){
 		}
 		return true;
 	}
-	std::cout<<"*click*"<<std::endl;
+	printf("*click*\n");
 	return false;
 }
 
 int main(){
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::mt19937 rng(seed);
-	std::uniform_int_distribution<> c(2,8);
-	std::uniform_int_distribution<> bulletchance(0,1);
-	count=c(rng);
+	time_t seed = time(NULL);
+	srand(seed);
+	int bmin=2;
+	int bmax=8;
+	count=(rand()%(bmax-bmin+1))+bmin;
 	bool shots[count];
-	std::cout<<"Count is "<<count<<" rounds"<<std::endl;
+	printf("Count is %d rounds\n",count);
 	for(int i=0;i<count;i++){
-		shots[i]=bulletchance(rng);
+		shots[i]=rand()%2;
 		if(shots[i]){
 			live++;
 		}else{
@@ -65,44 +57,44 @@ int main(){
 		}
 	}
 	if(live==0){
-		std::uniform_int_distribution<> fuck(0,count-1);
-		shots[fuck(rng)]=true;
+		shots[rand()%(bmax)]=true;
 		live++;
 		blank--;
 	}
-	std::cout<<"Dealer: \""<<live<<" LIVE ROUNDS. "<<blank<<" BLANKS.\""<<std::endl;
+	printf("Dealer: \"%d LIVE ROUNDS. %d BLANK\"\n",live,blank);
 
 	for(int i=0;i<count;i++){
-		std::cout<<"*shk*"<<std::endl;
+
+		printf("*shk*\n");
 	}
 	bool myTurn=false;
 	bool iKnowRound=false;
 	while(count>0){
 		if(myTurn){
-			std::cout<<"Dealer: MY TURN!\nHMMM..."<<std::endl;
+			printf("Dealer: MY TURN! HMMM...\"\n");
 			if(count==1){
 				iKnowRound=true;
 			}
 			bool target;
 			if(!iKnowRound){
-				target=bulletchance(rng);
+				target=rand()%2;
 			}else{
 				target=!shots[count-1];
 			}
-			std::cout<<"The dealer points the gun at "<<(target ? "himself.":"you.")<<std::endl;
+			printf("The dealer points the gun at %s.\n",(target ? "himself":"you"));
 			myTurn=!shoot(target,shots,count);
 			myTurn = target?myTurn:false;
 		}else{
-			std::cout<<"Dealer: YOUR TURN!"<<std::endl;
+			printf("Dealer: YOUR TURN!\"\n");
 			bool action=false;
 			while(!action){
-				std::cout<<"\n\nShoot yourself? (y/n)"<<std::endl;
-				std::string answer;
-				std::cin>>answer;
-				if(answer=="yes"||answer=="y"){
+				printf("\nShoot yourself? (Y/N)");
+				char answer[3];
+				fgets(answer,3,stdin);
+				if(answer[0]=='y'||answer[0]=='Y'){
 					myTurn = shoot(true,shots,count);
 					action=true;
-				}else if(answer=="no"||answer=="n"){
+				}else if(answer[0]=='n'||answer[0]=='N'){
 					shoot(false,shots,count);
 					myTurn=true;
 					action=true;
@@ -111,5 +103,5 @@ int main(){
 		}
 		count--;
 	}
-	std::cout<<"Final score:\nPlayer: "<<playerLife<<", Dealer: "<<myLife<<std::endl;
+	printf("Final score:\nPlayer: %d, Dealer: %d\n",playerLife,myLife);
 }
