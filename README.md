@@ -1,5 +1,5 @@
 # Buckshot-Roulette-Terminal
-A command line version of Buckshot Roulette in 115 lines of code. MinGW was able to compile it to a 668kb executable.
+A command line version of Buckshot Roulette in 107 lines of code. MinGW was able to compile it to a 668kb executable.
 
 # How to play
 Download the latest release or compile from the source code, then run the application.
